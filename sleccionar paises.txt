@@ -1,0 +1,56 @@
+<select name="" id="paises1">
+        <option value="">seleccionar paises</option>
+        <option value="colombia">colombia</option>
+        <option value="espana">españa</option>
+    
+     </select>
+     <select name="" id="ciudades" style="display: none;"></select>
+     <output id="outputSelect">
+     </output>
+     
+   <script>
+    let paises={
+        'colombia':[
+        " santa maria",
+        'cali',
+        'bogota',
+        'medellin',
+    ],
+    'espana':[
+        'madrid',
+    'barcelona',
+'valencia'
+]
+};
+let SelectPaises=document.getElementById("paises1");
+let SelectCiudades=document.getElementById("ciudades");
+let outputSelect=document.getElementById("outputSelect");
+SelectPaises.addEventListener("change",function(){
+    if(this.value!=''){
+        let opts=makeOptiones(paises[this.value]);
+        console.log(makeOptiones(paises[this.value]));
+        SelectCiudades.innerHTML=opts;
+        SelectCiudades.style.display='inline-block';
+    }else{
+        SelectCiudades.style.display='none';
+        SelectCiudades.innerHTML="";
+        outputSelect.innerHTML="";
+
+    
+}
+})
+function makeOptiones(values){
+    let opts='<option value="">seleccionar ciudad</option>';
+    values.forEach(value => {
+        opts +=`<option value="${value}">${value}</option>`;
+        
+    });
+    return opts;
+}
+SelectCiudades.addEventListener("change",function(){
+    if(this.value!=""){
+        outputSelect.innerHTML=`<br>tu seleccion de pais es: ${SelectPaises.options[SelectPaises.selectedIndex].text}<br> tu seleccion de ciudadad:${this.value}`;
+    }else{
+        SelectCiudades.html="";
+    }
+})
